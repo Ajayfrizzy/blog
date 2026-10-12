@@ -16,7 +16,7 @@ tags:
   - "CI/CD"
   - "Nginx"
   - "Virtual Machines"
-draft: true
+draft: false
 ---
 
 In our [Django guide](https://blog.rumptycloud.com/blog/how-to-deploy-a-django-app-on-rumptycloud/) we deployed an app the honest way: SSH into the VM, pull the code, restart gunicorn, reload nginx. It works, and it's how a lot of servers are run. But notice what it costs you. Every deploy means logging in and typing commands by hand.
