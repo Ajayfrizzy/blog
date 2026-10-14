@@ -3,7 +3,7 @@ title: "How to Deploy a Next.js App on RumptyCloud"
 description: "Deploy a Next.js app from GitHub on RumptyCloud: build and start commands, env vars, health checks, and fixes for common build failures."
 publishedDate: 2026-10-14
 updatedDate: 2026-10-14
-author: "John Enechukwu"
+author: "John Chinedu Enechukwu"
 authorType: "Person"
 cover: "/journal/img/community-deploy-nextjs-1260.webp"
 coverWidth: 1260
@@ -155,3 +155,7 @@ Once your repository and deployment are connected, your normal workflow is simpl
 > Write code → push to GitHub → review the deployment.
 
 RumptyCloud keeps the essential controls—build settings, environment variables, logs, metrics, redeployments, and custom domains—together on the deployment page, so you can focus on shipping your Next.js app.
+
+## About the author
+
+John Chinedu Enechukwu is a full-stack and AI builder in Nigeria. He writes build-in-public notes and guides on X as [@The_Real_EJC](https://x.com/The_Real_EJC).
