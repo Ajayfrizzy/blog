@@ -158,4 +158,4 @@ RumptyCloud keeps the essential controls—build settings, environment variables
 
 ## About the author
 
-John Chinedu Enechukwu is a full-stack and AI builder in Nigeria. He writes build-in-public notes and guides on X as [@The_Real_EJC](https://x.com/The_Real_EJC).
+John Chinedu Enechukwu is a Nigerian Web3 educator and builder. He founded NextChain, a community that has onboarded 200+ young Africans into emerging tech, and he builds and writes at the intersection of Web3 and AI. He shares build-in-public notes and guides on X as [@The_Real_EJC](https://x.com/The_Real_EJC).
