@@ -74,6 +74,82 @@
     img.addEventListener('load', () => fig.classList.remove('is-missing'));
   });
 
+  /* image lightbox: click a picture in the article body to view it large; click it again to zoom to full size */
+  const pics = $$('#article img').filter((img) => !img.closest('a'));
+  if (pics.length) {
+    const box = document.createElement('dialog');
+    box.className = 'lightbox';
+    box.setAttribute('aria-label', 'Image viewer');
+    box.tabIndex = -1;
+    box.innerHTML = '<div class="lightbox__stage"><img class="lightbox__img" alt="" /></div><p class="lightbox__cap"></p><button class="lightbox__close" type="button" aria-label="Close image">✕</button>';
+    document.body.append(box);
+    const stage = $('.lightbox__stage', box);
+    const big = $('.lightbox__img', box);
+    const cap = $('.lightbox__cap', box);
+
+    const canZoom = () => big.naturalWidth > big.clientWidth + 1 || big.naturalHeight > big.clientHeight + 1;
+
+    const setZoom = (on, e) => {
+      const r = big.getBoundingClientRect();
+      const fx = e ? (e.clientX - r.left) / r.width : 0.5;
+      const fy = e ? (e.clientY - r.top) / r.height : 0.5;
+      box.classList.toggle('is-zoomed', on);
+      if (!on) return;
+      /* keep the clicked spot under the cursor */
+      stage.scrollLeft = big.offsetLeft + big.offsetWidth * fx - stage.clientWidth / 2;
+      stage.scrollTop = big.offsetTop + big.offsetHeight * fy - stage.clientHeight / 2;
+    };
+
+    const open = (img) => {
+      if (!img.naturalWidth) return;
+      big.src = img.currentSrc || img.src;
+      big.alt = img.alt;
+      cap.textContent = img.alt;
+      cap.hidden = !img.alt;
+      box.classList.remove('is-zoomed');
+      document.documentElement.classList.add('is-locked');
+      box.showModal();
+      box.focus();
+      box.classList.toggle('can-zoom', canZoom());
+      if (reduced() || !big.animate) return;
+      /* grow out of the inline image */
+      const a = img.getBoundingClientRect();
+      const b = big.getBoundingClientRect();
+      if (!b.width) return;
+      big.animate([
+        { transformOrigin: '0 0', transform: `translate(${a.left - b.left}px, ${a.top - b.top}px) scale(${a.width / b.width})` },
+        { transformOrigin: '0 0', transform: 'none' },
+      ], { duration: 320, easing: 'cubic-bezier(.3, 1.1, .35, 1)' });
+    };
+
+    pics.forEach((img) => {
+      img.classList.add('is-zoomable');
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', `Enlarge image${img.alt ? `: ${img.alt}` : ''}`);
+      img.addEventListener('click', () => open(img));
+      img.addEventListener('keydown', (e) => {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        open(img);
+      });
+    });
+
+    big.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (box.classList.contains('is-zoomed')) setZoom(false);
+      else if (canZoom()) setZoom(true, e);
+      else box.close();
+    });
+    stage.addEventListener('click', () => box.close());
+    box.addEventListener('click', (e) => { if (e.target === box) box.close(); });
+    $('.lightbox__close', box).addEventListener('click', () => box.close());
+    box.addEventListener('close', () => {
+      document.documentElement.classList.remove('is-locked');
+      box.classList.remove('is-zoomed');
+    });
+  }
+
   if ($('#article')) {
   /* share */
   const pageUrl = $('link[rel="canonical"]')?.href || location.href.split('#')[0];
