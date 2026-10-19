@@ -9,6 +9,8 @@ cover: "/journal/img/community-deploy-nextjs-1260.webp"
 coverWidth: 1260
 coverHeight: 760
 coverAlt: "Journal illustration for How to Deploy a Next.js App on RumptyCloud"
+card: "/journal/img/community-deploy-nextjs-1260.webp"
+hero: "/journal/img/community-deploy-nextjs-2560.webp"
 tags:
   - "Deployment"
   - "Next.js"
@@ -77,6 +79,8 @@ The **Source** section connects the deployment to GitHub:
 4. Give the deployment a recognizable **Name**.
 5. Confirm the **Branch** you want to deploy.
 
+![Source Section](/images/how-to-deploy-nextjs-app-on-rumptycloud-source.png)
+
 If the repository is a monorepo, set **Root directory** to the folder that contains the Next.js app. Otherwise, leave it empty.
 
 For a Next.js app, select **Web Service/Backend** under **Application type**. RumptyCloud inspects the selected repository and may fill in some of these details for you.
@@ -96,6 +100,8 @@ For a typical Next.js app, use the following settings:
 | Readiness/health check path | `/health` for the example above, or `/` |
 | Port | `3000`, or whatever your app falls back to |
 
+![Deployment Settings](/images/how-to-deploy-nextjs-app-on-rumptycloud-settings.png)
+
 **Auto** is the standard choice. If RumptyCloud discovers a Dockerfile in the repository, the form also lets you choose **Dockerfile**; use that only when you intend to deploy with the Dockerfile in your repository.
 
 The configured port must match the port your app listens on. `next start` reading `process.env.PORT` with a `3000` fallback, as in the example, keeps the two aligned.
@@ -108,6 +114,8 @@ If your application needs configuration such as a database URL, API key, or auth
 DATABASE_URL=postgresql://...
 AUTH_SECRET=...
 ```
+
+![Environment Variables Section](/images/how-to-deploy-nextjs-app-on-rumptycloud-env-vars.png)
 
 Server-side values like these are read at runtime, so adding or changing them only requires a redeploy.
 
@@ -127,9 +135,13 @@ Before continuing, review the two checkboxes below the app settings:
 - Keep **Start a build after creating this deployment** selected if you want to deploy immediately.
 - Keep **Automatically deploy when this branch receives new pushes** selected if future pushes to the branch should start a new deployment.
 
+![Autoscaling and runtime options](/images/how-to-deploy-nextjs-app-on-rumptycloud-runtime.png)
+
 Select **Create deployment**. If RumptyCloud asks you to review the acceptable use policy, accept it to continue.
 
 You will be taken to the deployment page while the first run is in progress. Select **View logs** to follow it, or open **Runs** and choose the current run. When the status changes from **Building** to **Live**, select **Open app** to visit its public URL.
+
+![The Runs tab of a deployment](/images/how-to-deploy-nextjs-app-on-rumptycloud-runs.png)
 
 ## Troubleshooting a failed deployment
 
