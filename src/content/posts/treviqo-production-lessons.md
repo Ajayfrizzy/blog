@@ -2,11 +2,11 @@
 title: "Beyond Deployment: 3 Production Lessons I Learned Building Treviqo on RumptyCloud"
 description: "Lessons from debugging storage permissions, Prisma transactions, and database connectivity while deploying Treviqo."
 publishedDate: 2026-10-22
-author: "Your publishing name"
+author: "Oluwaseun"
 authorType: "Person"
-cover: "public/images/treviqo-production-lessons.png"
-coverWidth: 1200
-coverHeight: 630
+cover: "/images/treviqo-production-lessons.png"
+coverWidth: 1731
+coverHeight: 909
 coverAlt: "Treviqo production engineering lessons"
 tags:
   - "Deployment"
@@ -161,8 +161,6 @@ It shouldn't reveal private credentials merely to make debugging easier.
 
 One major misconception this experience corrected for me is that successful builds and deployments automatically mean an application is production-ready.
 
-They don't.
-
 A deployed application still needs its dependencies, permissions, background jobs, and user-facing workflows to behave correctly.
 
 For Treviqo, useful checks included:
@@ -196,5 +194,3 @@ And sometimes the most useful lesson comes from discovering that the problem you
 ---
 
 *Project: [Treviqo](https://treviqo.rumptycloud.app) — built for Devcenter Hacktober 2026 × RumptyCloud.*
-
-*Source code: [github.com/Ajayfrizzy/treviqo](https://github.com/Ajayfrizzy/treviqo)*
